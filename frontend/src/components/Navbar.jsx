@@ -6,12 +6,13 @@ const Navbar = () => {
   const navigate = useNavigate();
   return (
     <div className="flex justify-between items-center py-5 mx-8 sm:mx-20 xl:mx-32">
-      <img
+      <div className=" border py-2 px-3 bg-primary text-white rounded-md">BrainFuel</div>
+      {/* <img
         onClick={() => navigate("/")}
         src={assets.logo}
         alt="logo"
         className="w-32 sm:w-44 cursor-pointer"
-      />
+      /> */}
       <button  onClick={() => navigate("/admin")} className="flex gap-2 rounded-full text-sm cursor-pointer bg-primary text-white px-10 py-2.5 justify-between items-center">
         Login
         <img src={assets.arrow} alt="arrow" className="w-3" />

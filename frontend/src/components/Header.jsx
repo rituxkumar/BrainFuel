@@ -10,7 +10,7 @@ const Header = () => {
           <img src={assets.star_icon} alt="" className="w-2.5" />
         </div>
         <h1 className="text-3xl sm:text-6xl font-semibold sm:leading-16 text-gray-700">
-          Your own <span className="text-primary">blogging</span>
+          Your own <span className="text-primary">storyVerse</span>
           <br />
           platform.
         </h1>
