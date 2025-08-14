@@ -7,7 +7,7 @@ const BlogCard = ({ blog }) => {
 
   return (
     <div
-      onClick={() => navigate(`/blog/$(_id`)}
+      onClick={() => navigate(`/blog/${_id}`)}
       className="w-full rounded-lg overflow-hidden shadow hover:scale-102 hover:shadow-primary/25 duration-300 cursor-pointer"
     >
       <img src={image} alt="" className="aspect-video" />
