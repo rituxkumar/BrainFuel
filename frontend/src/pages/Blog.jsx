@@ -5,7 +5,9 @@ import Moment from "moment";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
-
+import { FaFacebook } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaGooglePlusG } from "react-icons/fa";
 const Blog = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
@@ -33,16 +35,16 @@ const Blog = () => {
   return data ? (
     <div className="relative">
       <nav className="fixed top-0 left-0 w-full z-50 bg-white">
-        <Navbar />
+        <Navbar  />
       </nav>
 
       <img
         src={assets.gradientBackground}
         alt=""
-        className="absoulte -z-10 object-cover top-0 left-0 w-full h-[300px] opacity-50"
+        className="fixed -z-10 object-cover top-0 left-0 w-full opacity-90"
       />
 
-      <div className="text-center text-gray-600">
+      <div className="text-center text-gray-600  mt-32">
         <p className="text-primary py-4 font-medium">
           Published on {Moment(data.createdAt).format("MMMM Do YYYY")}
         </p>
@@ -56,7 +58,11 @@ const Blog = () => {
       </div>
 
       <div className="mx-5 max-w-5xl md:mx-auto my-10 mt-6">
-        <img src={data.image} alt="" className="rounded-3xl mb-5" />
+        <img
+          src={data.image}
+          alt=""
+          className="rounded-3xl mb-5 w-[70%] mx-auto "
+        />
         <div
           className="rich-text max-w-3xl mx-auto"
           dangerouslySetInnerHTML={{ __html: data.description }}
@@ -88,13 +94,17 @@ const Blog = () => {
             onSubmit={addComment}
             className="flex flex-col items-start gap-4 max-w-lg"
           >
-            <input onChange={(e)=>setName(e.target.value)} value={name}
+            <input
+              onChange={(e) => setName(e.target.value)}
+              value={name}
               type="text"
               placeholder="Name"
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
             />
-            <textarea onChange={(e)=>setContent(e.target.value)} value={content}
+            <textarea
+              onChange={(e) => setContent(e.target.value)}
+              value={content}
               placeholder="comment"
               className="w-full p-2 border border-gray-300 rounded outline-none h-48"
               required
@@ -109,11 +119,17 @@ const Blog = () => {
           </form>
         </div>
         <div className="my-24 max-w-3xl mx-auto">
-          <p className="my-4 font-semibold">Share this article on social media platform</p>
-          <div className="flex">
-            <img src={assets.facebook_icon} width={50} alt="" />
-            <img src={assets.googleplus_icon} width={50} alt="" />
-            <img src={assets.twitter_icon} width={50} alt="" />
+          <p className="my-4 font-semibold">
+            Share this article on social media platform
+          </p>
+          <div className="flex gap-3">
+            {/* <img src={assets.facebook_icon} width={50} alt="" /> */}
+            <FaFacebook className="text-primary text-3xl" />
+            <FaXTwitter className="text-primary text-3xl" />
+            <FaGooglePlusG className="text-primary text-3xl border border-primary/40 rounded-full" />
+
+            {/* <img src={assets.googleplus_icon} width={50} alt="" />
+            <img src={assets.twitter_icon} width={50} alt="" /> */}
           </div>
         </div>
       </div>

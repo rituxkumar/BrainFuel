@@ -9,7 +9,7 @@ const BlogTableItem = ({blog,fetchBlogs,index}) => {
       <th className="px-2 py-4">{index}</th>
       <td className="px-2 py-4">{title}</td>
       <td className="px-2 py-4 max-sm:hidden">{BlogDate.toDateString()}</td>
-      <td className="px-2 py-4">
+      <td className="px-2 py-4 ">
         <p
           className={`${
             blog.isPublished ? "text-green-600" : "text-orange-700"
@@ -19,7 +19,8 @@ const BlogTableItem = ({blog,fetchBlogs,index}) => {
         </p>
       </td>
       <td>
-        <button className="border px-2 py-0.5 mt-1 rounded cursor-pointer">
+       <div className="flex gap-2">
+         <button className="border px-2 py-0.5 mt-1 rounded cursor-pointer">
           {blog.isPublished ? "Unpublish" : "Publish"}
         </button>
         <img
@@ -27,6 +28,7 @@ const BlogTableItem = ({blog,fetchBlogs,index}) => {
           className="w-8 hover:scale-110 transition-all cursor-pointer"
           alt=""
         />
+       </div>
       </td>
     </tr>
   );
