@@ -7,6 +7,7 @@ import AddBlog from "./pages/admin/AddBlog";
 import Comments from "./pages/admin/Comments";
 import Dashboard from "./pages/admin/Dashboard";
 import ListBlog from "./pages/admin/ListBlog";
+import 'quill/dist/quill.snow.css'
 import Login from "./components/admin/Login";
 
 
