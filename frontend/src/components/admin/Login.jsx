@@ -15,18 +15,20 @@ const Login = () => {
             </h1>
             <p>Enter your credientials to access the admin panel</p>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="mt-6 w-full sm:max-w-md text-gray-600">
              <div className="flex flex-col">
               <label>
                 Email
               </label>
-              <input type="email" required placeholder="Enter your email-id" className="border-b-2 border-primary p-2 outline-none mb-6"/>
+              <input onChange={e=>setEmail(e.target.value)} value={email}
+              type="email" required placeholder="Enter your email-id" className="border-b-2 border-primary p-2 outline-none mb-6"/>
              </div>
              <div className="flex flex-col">
               <label>
                 Password
               </label>
-              <input type="password" required placeholder="Enter your password" className="border-b-2 border-primary p-2 outline-none mb-6"/>
+              <input onChange={e=>setPassword(e.target.value)} value={password}
+              type="password" required placeholder="Enter your password" className="border-b-2 border-primary p-2 outline-none mb-6"/>
              </div>
              <button type="submit" className="text-white rounded cursor-pointer hover:bg-primary/90 w-full py-3 font-medium bg-primary transition-all">
               Login
