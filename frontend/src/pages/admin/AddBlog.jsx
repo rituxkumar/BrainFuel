@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { assets } from "../../assets/assets";
+import React, { useEffect, useRef, useState } from "react";
+import { assets, blogCategories } from "../../assets/assets";
 import Quill from "quill";
 const AddBlog = () => {
   const quillRef = useRef(null);
@@ -16,6 +16,13 @@ const AddBlog = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
   };
+
+  useEffect(() => {
+    //initial quill once
+    if (!quillRef.current && editorRef.current) {
+      quillRef.current = new Quill(editorRef.current, { theme: "snow" });
+    }
+  }, []);
 
   return (
     <form
@@ -60,6 +67,7 @@ const AddBlog = () => {
 
         <p className="mt-4">Blog Description</p>
         <div className="max-w-lg pt-2 relative h-64 pb-16 sm:pb-10">
+          <div ref={editorRef}></div>
           <button
             type="button"
             onClick={genrateContent}
@@ -68,6 +76,26 @@ const AddBlog = () => {
             Genrate with AI
           </button>
         </div>
+        <p className="mt-4">Blog Category </p>
+        <select
+          name="category"
+          className="mt-2 px-3 py-2 border text-gray-500 border-gray-300 outline-none rounded"
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="">select category</option>
+          {blogCategories.map((item, index) => {
+            return (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            );
+          })}
+        </select>
+        <div>
+          <p>Publish Now</p>
+          <input type="checkbox" checked={isPublisehed} className="cursor-pointer scale-125" onChange={e=>setIsPublished(e.target.checked)} />
+        </div>
+        <button type="submit" className="bg-primary text-white rounded cursor-pointer text-sm mt-8 w-40 h-10 ">Add Blog</button>
       </div>
     </form>
   );
