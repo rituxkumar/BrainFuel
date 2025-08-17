@@ -4,6 +4,7 @@ import "dotenv/config";
 
 import connectDB from "./configs/db.js";
 import adminRouter from "./routes/adminRoutes.js";
+import blogRouter from "./routes/blogRoutes.js";
 
 const app = express();
 await connectDB();
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 
 //routes
 app.use("/api/v1", adminRouter);
+app.use("/api/v1", blogRouter);
 
 const PORT = process.env.PORT || 3001;
 
