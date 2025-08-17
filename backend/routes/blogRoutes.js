@@ -5,6 +5,6 @@ import auth from '../middleware/auth.js';
 
 const blogRouter = express.Router()
 
-blogRouter.post("/add",upload.single('image'),auth,addBlog)
+blogRouter.post("/add",upload.single('image'),auth,addBlog);
 
 export default blogRouter;

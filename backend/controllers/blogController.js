@@ -1,4 +1,4 @@
-import imagekit from "../configs/imageKit";
+import imagekit from "../configs/imageKit.js";
 import Blog from "../models/Blog.js";
 import fs from 'fs'
 
@@ -15,19 +15,26 @@ export const addBlog = async (req,res) =>{
     }
 
     const fileBuffer = fs.readFileSync(imageFile.path)
+   
+    
 
     // upload image to imagekit
+ console.log("jnj");
 
+    
+ 
     const response = await imagekit.upload({
-      file:fileBuffer,
+      file:req.file.path,
       fileName:imageFile.originalname,
       folder:"/blogs"
     })
 
-    // optimization through imagekit url transformation
-   
+
+     console.log("jnj");
+
     const optimizedImageUrl = imagekit.url({
       path:response.filePath,
+        urlEndpoint : process.env.IMAGEKIT_URL_ENDPOINT ,
       transformation:[
         {quality:'auto'}, // auto compression
         {format:'webp'}, // convert to modern format
@@ -36,6 +43,8 @@ export const addBlog = async (req,res) =>{
     });
 
     const image = optimizedImageUrl;
+   
+    
 
    await Blog.create({title,subTitle,description,category,image,isPublished})
 
@@ -44,7 +53,7 @@ export const addBlog = async (req,res) =>{
      
   } catch (error) {
 
-    res.json({success:false,message:error.message})
+    res.json({success:false,message:error.message,})
     
   }
 }
