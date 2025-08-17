@@ -14,11 +14,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("API is working fine.");
 });
+
 //routes
-app.use('/api/v1',adminRouter)
-
-
-
+app.use("/api/v1", adminRouter);
 
 const PORT = process.env.PORT || 3001;
 
