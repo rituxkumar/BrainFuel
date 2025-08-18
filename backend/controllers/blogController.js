@@ -25,13 +25,13 @@ export const addBlog = async (req,res) =>{
     
  
     const response = await imagekit.upload({
-      file:req.file.path,
+      file:fileBuffer,
       fileName:imageFile.originalname,
       folder:"/blogs"
     })
 
 
-     console.log(response);
+    //  console.log(response);
 
     const optimizedImageUrl = imagekit.url({
       path:response.filePath,
