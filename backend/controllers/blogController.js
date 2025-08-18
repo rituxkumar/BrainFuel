@@ -1,6 +1,7 @@
 import imagekit from "../configs/imageKit.js";
 import Blog from "../models/Blog.js";
 import fs from "fs";
+import Comment from "../models/Comment.js";
 
 export const addBlog = async (req, res) => {
   try {
@@ -67,7 +68,7 @@ export const getAllBlogs = async (req, res) => {
 
 export const getBlogById = async (req, res) => {
   try {
-    const { blogId } = req.params();
+    const { blogId } = req.params;
     const blog = await Blog.findById(blogId);
 
     if (!blog) {
@@ -97,6 +98,30 @@ export const togglePublish = async (req, res) => {
     blog.isPublished = !blog.isPublished;
     await blog.save();
     res.json({ success: true, message: "Blog status updated" });
+  } catch (error) {
+    res.json({ message: false, message: error.message });
+  }
+};
+
+export const addComment = async (req, res) => {
+  try {
+    const { blog, name, content } = req.body;
+    await Comment.create({ blog, name, content });
+
+    res.json({ success: true, message: "Comment added for review" });
+  } catch (error) {
+    res.json({ message: false, message: error.message });
+  }
+};
+
+export const getBlogComments = async (req, res) => {
+  try {
+    const { blogId } = req.body;
+    const comments = await Comment.find({
+      blog: blogId,
+      isApproved: trur,
+    }).sort({ createdAt: -1 });
+    res.json({ success: true, comments });
   } catch (error) {
     res.json({ message: false, message: error.message });
   }
