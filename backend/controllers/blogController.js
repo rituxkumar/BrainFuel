@@ -19,7 +19,8 @@ export const addBlog = async (req,res) =>{
     
 
     // upload image to imagekit
- console.log("jnj");
+    
+    //  console.log(fileBuffer);
 
     
  
@@ -30,11 +31,11 @@ export const addBlog = async (req,res) =>{
     })
 
 
-     console.log("jnj");
+     console.log(response);
 
     const optimizedImageUrl = imagekit.url({
       path:response.filePath,
-        urlEndpoint : process.env.IMAGEKIT_URL_ENDPOINT ,
+      
       transformation:[
         {quality:'auto'}, // auto compression
         {format:'webp'}, // convert to modern format
@@ -53,7 +54,7 @@ export const addBlog = async (req,res) =>{
      
   } catch (error) {
 
-    res.json({success:false,message:error.message,})
+    res.json({success:false,message:error,})
     
   }
 }
