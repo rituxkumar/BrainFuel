@@ -1,9 +1,18 @@
 import React from "react";
 import { assets } from "../../assets/assets";
+import { useAppContext } from "../../../context/AppContext";
 
 const BlogTableItem = ({blog,fetchBlogs,index}) => {
   const {title,createdAt}= blog;
   const BlogDate = new Date(createdAt) 
+
+  const {axios} = useAppContext();
+ 
+
+  const deleteBlog = async () =>{
+    
+  }
+
   return (
     <tr className="border-y border-gray-300">
       <th className="px-2 py-4">{index}</th>
