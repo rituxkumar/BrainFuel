@@ -9,7 +9,7 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const navigate = useNavigate();
-
+  
   const [token, setToken] = useState(null);
   const [blogs, setBlogs] = useState([]);
   const [input, setInput] = useState("");
@@ -18,6 +18,8 @@ export const AppProvider = ({ children }) => {
     try {
       const { data } = await axios.get("/api/v1/all");
       data.success ? setBlogs(data.blogs) : toast.error(data.message);
+     
+      
     } catch (error) {
       toast.error(error.message);
     }
