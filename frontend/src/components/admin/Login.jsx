@@ -11,20 +11,23 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("/api/v1/login", {
+      const { data } = await axios.post(`/api/v1/login`, {
         email,
         password,
       });
 
       if (data.success) {
+       
         setToken(data.token);
+        toast.success(data.message)
         localStorage.setItem("token", data.token);
         axios.defaults.headers.common["Authorization"] = data.token;
       } else {
-        toast.error(data.message);
+        toast.error("Invalid credientials");
+         
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error("error");
     }
   };
   return (

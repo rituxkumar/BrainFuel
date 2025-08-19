@@ -3,10 +3,13 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { AppProvider } from "../context/AppContext.jsx";
+import { Toaster } from "react-hot-toast";
+
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <AppProvider>
+      <Toaster />
       <App />
     </AppProvider>
   </BrowserRouter>
