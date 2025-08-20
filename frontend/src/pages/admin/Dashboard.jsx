@@ -2,16 +2,29 @@ import React, { useEffect, useState } from "react";
 import { assets, dashboard_data } from "../../assets/assets";
 import Comments from "./Comments";
 import BlogTableItem from "../../components/admin/BlogTableItem";
+import { useAppContext } from "../../../context/AppContext";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
-  const [dashboardData, setDashboardData] = useState({
+  const [localdashboardData, setLocalDashboardData] = useState({
     blogs: 0,
     comments: 0,
     drafts: 0,
     recentBlogs: [],
   });
+
+  const { axios } = useAppContext();
+
   const fetchDashboard = async () => {
-    setDashboardData(dashboard_data);
+    try {
+      const { data } = await axios.get("/api/v1/dashboard");
+
+      data.success
+        ? setLocalDashboardData(data.localdashboardData)
+        : toast.error(data.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   useEffect(() => {
@@ -25,7 +38,7 @@ const Dashboard = () => {
           <img src={assets.dashboard_icon_1} alt="" />
           <div>
             <p className="text-xl font-semibold text-gray-600">
-              {dashboardData.blogs}
+              {localdashboardData.blogs}
             </p>
             <p className="text-gray-400 font-light">Blogs</p>
           </div>
@@ -34,7 +47,7 @@ const Dashboard = () => {
           <img src={assets.dashboard_icon_2} alt="" />
           <div>
             <p className="text-xl font-semibold text-gray-600">
-              {dashboardData.drafts}
+              {localdashboardData.drafts}
             </p>
             <p className="text-gray-400 font-light">Drafts</p>
           </div>
@@ -43,7 +56,7 @@ const Dashboard = () => {
           <img src={assets.dashboard_icon_3} alt="" />
           <div>
             <p className="text-xl font-semibold text-gray-600">
-              {dashboardData.comments}
+              {localdashboardData.comments}
             </p>
             <p className="text-gray-400 font-light">Comments</p>
           </div>
@@ -58,18 +71,33 @@ const Dashboard = () => {
           <table className="w-full text-sm text-gray-600">
             <thead className="text-xs text-gray-600 text-left ippercase">
               <tr>
-                <th space='col' className="px-2 py-4 xl:px-6">#</th>
-                <th space='col' className="px-2 py-4">Blog Title</th>
-                <th space='col' className="px-2 py-4 max-sm:hidden">Date</th>
-                <th space='col' className="px-2 py-4 max-sm:hidden">Status</th>
-                <th space='col' className="px-2 py-4">Actions</th>
+                <th space="col" className="px-2 py-4 xl:px-6">
+                  #
+                </th>
+                <th space="col" className="px-2 py-4">
+                  Blog Title
+                </th>
+                <th space="col" className="px-2 py-4 max-sm:hidden">
+                  Date
+                </th>
+                <th space="col" className="px-2 py-4 max-sm:hidden">
+                  Status
+                </th>
+                <th space="col" className="px-2 py-4">
+                  Actions
+                </th>
               </tr>
-
             </thead>
             <tbody>
-              {dashboardData.recentBlogs.map((blog,index)=>{
-                return <BlogTableItem key={blog._id} blog={blog}
-                fetchBlogs={fetchDashboard} index={index+1} />
+              {localdashboardData.recentBlogs.map((blog, index) => {
+                return (
+                  <BlogTableItem
+                    key={blog._id}
+                    blog={blog}
+                    fetchBlogs={fetchDashboard}
+                    index={index + 1}
+                  />
+                );
               })}
             </tbody>
           </table>
