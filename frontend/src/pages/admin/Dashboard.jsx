@@ -20,7 +20,7 @@ const Dashboard = () => {
       const { data } = await axios.get("/api/v1/dashboard");
 
       data.success
-        ? setLocalDashboardData(data.localdashboardData)
+        ? setLocalDashboardData(data.dashboardData)
         : toast.error(data.message);
     } catch (error) {
       toast.error(error.message);

@@ -23,7 +23,7 @@ const Layout = () => {
         >
           BrainFuel
         </p>
-        <button className="text-sm px-8 py-2 bg-primary text-white rounded-full cursor-pointer" onClick={()=>navigate('/')}>
+        <button className="text-sm px-8 py-2 bg-primary text-white rounded-full cursor-pointer" onClick={logout}>
           Logout
         </button>
       </div>

@@ -96,7 +96,7 @@ const Blog = () => {
         <img
           src={data.image}
           alt=""
-          className="rounded-3xl mb-5 w-[70%] mx-auto "
+          className="rounded-3xl mb-5 w-[50%] h-[350px] mx-auto "
         />
         <div
           className="rich-text max-w-3xl mx-auto"

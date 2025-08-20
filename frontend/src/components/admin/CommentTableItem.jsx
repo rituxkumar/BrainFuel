@@ -8,6 +8,9 @@ const CommentTableItem = ({ comment, fetchComments }) => {
   const BlogDate = new Date(createdAt);
 
   const {axios} = useAppContext();
+
+
+  
   const  approveComment = async () =>{
     try {
        const {data} = await axios.post('/api/v1/approve-comment',{id:_id})
