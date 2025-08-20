@@ -14,7 +14,7 @@ const AddBlog = () => {
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [category, setCategory] = useState("Startup");
-  const [isPublisehed, setIsPublished] = useState(false);
+  const [isPublished, setIsPublished] = useState(false);
 
   const genrateContent = async () => {};
 
@@ -26,7 +26,7 @@ const AddBlog = () => {
         const blog = {
           title,subTitle,
           description: quillRef.current.root.innerHTML,
-          category,isPublisehed
+          category,isPublished
         }
 
         const formData = new FormData();
@@ -40,14 +40,18 @@ const AddBlog = () => {
           setImage(false)
           setTitle('')
           quillRef.current.root.innerHTML = ''
-          setCategory('Startup')
+          setCategory('')
         }
         else{
+          console.log(data.message);
+          
           toast.error(data.message)
         }
 
 
     } catch (error) {
+      console.log(error);
+      
      toast.error(error.message) 
     }finally{
       setIsAdding(false)
@@ -120,7 +124,7 @@ const AddBlog = () => {
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="">select category</option>
-          {blogCategories.map((item, index) => {
+          {blogCategories?.map((item, index) => {
             return (
               <option key={index} value={item}>
                 {item}
@@ -132,7 +136,7 @@ const AddBlog = () => {
           <p>Publish Now</p>
           <input
             type="checkbox"
-            checked={isPublisehed}
+            checked={isPublished}
             className="cursor-pointer scale-125"
             onChange={(e) => setIsPublished(e.target.checked)}
           />

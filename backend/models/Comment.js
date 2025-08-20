@@ -7,7 +7,7 @@ const commentSchema = new mongoose.Schema(
     name: { type: String, required: true },
     content: { type: String, required: true },
 
-    isApproved: { type: Boolean, required: true },
+    isApproved: { type: Boolean, required: true  , default:true},
   },
   { timestamps: true }
 );

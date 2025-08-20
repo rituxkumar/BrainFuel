@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { blog_data } from "../../assets/assets";
+
 import BlogTableItem from "../../components/admin/BlogTableItem";
 import { useAppContext } from "../../../context/AppContext";
 import toast from "react-hot-toast";
@@ -11,14 +11,20 @@ const ListBlog = () => {
 
   const fetchBlogs = async () => {
     try {
-      const { data } = await axios.get("/api/v1/blogs");
+      const  {data}  = await axios.get("/api/v1/all");
+      console.log(data);
+      
       if (data.success) {
         setBlogs(data.blogs);
       } else {
+        console.log(data?.message);
+        
         toast.error(data.message);
       }
-    } catch (error) {
+    } catch(error) {
       toast.error(error.message);
+      console.log(error);
+      
     }
   };
 

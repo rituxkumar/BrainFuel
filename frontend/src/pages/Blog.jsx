@@ -46,7 +46,7 @@ const Blog = () => {
 
     try {
       const { data } = await axios.post("/api/v1/add-comment", {
-        blogId: id,
+        blog: id,
         name,
         content,
       });
