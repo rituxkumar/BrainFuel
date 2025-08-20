@@ -8,10 +8,10 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center py-5 mx-8 sm:mx-20 xl:mx-32">
       <div
-        className=" border py-2 px-3 bg-primary text-white rounded-md cursor-pointer"
+        className="  py-2 px-3  text-white rounded-md cursor-pointer"
         onClick={() => navigate("/")}
       >
-        BrainFuel
+       <img src={assets.home} alt="img"  className="w-40"/>
       </div>
       {/* <img
         onClick={() => navigate("/")}

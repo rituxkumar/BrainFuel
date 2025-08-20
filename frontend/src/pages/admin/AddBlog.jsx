@@ -3,7 +3,7 @@ import { assets, blogCategories } from "../../assets/assets";
 import Quill from "quill";
 import { useAppContext } from "../../../context/AppContext";
 import toast from "react-hot-toast";
-import {parse} from "marked";
+import { parse } from "marked";
 
 const AddBlog = () => {
   const { axios } = useAppContext();
@@ -25,7 +25,7 @@ const AddBlog = () => {
       setLoading(true);
       const { data } = await axios.post("/api/v1/generate", { prompt: title });
       console.log(data);
-      
+
       if (data.success) {
         quillRef.current.root.innerHTML = parse(data.contents);
       } else {
@@ -33,7 +33,7 @@ const AddBlog = () => {
       }
     } catch (error) {
       console.log(error);
-      
+
       toast.error(error.message);
     } finally {
       setLoading(false);
@@ -130,7 +130,8 @@ const AddBlog = () => {
         <p className="mt-4">Blog Description</p>
         <div className="max-w-lg pt-2 relative h-64 pb-16 sm:pb-10">
           <div ref={editorRef}></div>
-          <button disabled={loading}
+          <button
+            disabled={loading}
             type="button"
             onClick={genrateContent}
             className="absolute bottom-1 right-2 ml-2 text-xs text-white bg-black/70 px-4 py-1.5 rounded hover:underline cursor-pointer hover:bg-black/45"

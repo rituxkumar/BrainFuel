@@ -1,12 +1,17 @@
 import React from "react";
-import { footer_data } from "../assets/assets";
+import { assets, footer_data } from "../assets/assets";
 
 const Footer = () => {
   return (
     <div className="px-6 md:px-16 lg:px-24 xl:px-32 bg-primary/32">
       <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-gray-500/30 text-gray-500">
         <div>
-          <h1 className="w-20 sm:w-44 bg-primary text-white">BrainFuel</h1>
+          <div
+                 className="  py-2 px-3  text-white rounded-md cursor-pointer"
+                 onClick={() => navigate("/")}
+               >
+                <img src={assets.home} alt="img"  className="w-32 rounded-full"/>
+               </div>
           <p className="max-w-[410px] mt-6">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, ut?
           </p>

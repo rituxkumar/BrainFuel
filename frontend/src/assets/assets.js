@@ -31,10 +31,12 @@ import dashboard_icon_1 from './dashboard_icon_1.svg'
 import dashboard_icon_2 from './dashboard_icon_2.svg'
 import dashboard_icon_3 from './dashboard_icon_3.svg'
 import dashboard_icon_4 from './dashboard_icon_4.svg'
+import home from './home.png'
 
 
 export const assets = {
     facebook_icon,
+    home,
     googleplus_icon,
     twitter_icon,
     logo,
