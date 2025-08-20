@@ -3,58 +3,75 @@ import { assets, blogCategories } from "../../assets/assets";
 import Quill from "quill";
 import { useAppContext } from "../../../context/AppContext";
 import toast from "react-hot-toast";
+import parse from "marked";
+
 const AddBlog = () => {
   const { axios } = useAppContext();
   const [isAdding, setIsAdding] = useState(false);
 
   const quillRef = useRef(null);
   const editorRef = useRef(null);
-
+  const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(false);
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [category, setCategory] = useState("Startup");
   const [isPublished, setIsPublished] = useState(false);
 
-  const genrateContent = async () => {};
+  const genrateContent = async () => {
+    if (!title) return toast.error("Please enter a title");
+
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/blog/genrate", { prompt: title });
+      if (data.success) {
+        quillRef.current.root.innerHTML = parse(data.content);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const onSubmitHandler = async (e) => {
     try {
       e.preventDefault();
-        setIsAdding(true)
-        
-        const blog = {
-          title,subTitle,
-          description: quillRef.current.root.innerHTML,
-          category,isPublished
-        }
+      setIsAdding(true);
 
-        const formData = new FormData();
-        formData.append('blog',JSON.stringify(blog))
-        formData.append('image',image)
+      const blog = {
+        title,
+        subTitle,
+        description: quillRef.current.root.innerHTML,
+        category,
+        isPublished,
+      };
 
-        const {data} = await axios.post('/api/v1/add',formData)
+      const formData = new FormData();
+      formData.append("blog", JSON.stringify(blog));
+      formData.append("image", image);
 
-        if(data.success){
-          toast.success(data.message);
-          setImage(false)
-          setTitle('')
-          quillRef.current.root.innerHTML = ''
-          setCategory('')
-        }
-        else{
-          console.log(data.message);
-          
-          toast.error(data.message)
-        }
+      const { data } = await axios.post("/api/v1/add", formData);
 
+      if (data.success) {
+        toast.success(data.message);
+        setImage(false);
+        setTitle("");
+        quillRef.current.root.innerHTML = "";
+        setCategory("");
+      } else {
+        console.log(data.message);
 
+        toast.error(data.message);
+      }
     } catch (error) {
       console.log(error);
-      
-     toast.error(error.message) 
-    }finally{
-      setIsAdding(false)
+
+      toast.error(error.message);
+    } finally {
+      setIsAdding(false);
     }
   };
 
